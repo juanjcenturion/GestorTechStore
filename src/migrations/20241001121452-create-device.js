@@ -2,40 +2,40 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Repair_orders', {
+    await queryInterface.createTable('Devices', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fecha: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      problema: {
+      marca: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
-      deviceId: {
+      modelo: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      typeId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model:'Devices',
-          key:'id',
-        },
+          model: 'Types',
+          key: 'id'
+        }
       },
-      userId: {
+      numero_serie: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      statusId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references :{
-          model:'Users',
-          key: 'id',
-        },
-      },
-      estimatedValue: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
+        references: {
+          model: 'States',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -48,6 +48,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Repair_orders');
+    await queryInterface.dropTable('Devices');
   }
 };

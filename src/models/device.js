@@ -1,19 +1,14 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Device extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      Device.belongsTo(models.Type, {foreignKey : 'typeId'})
-      Device.belongsTo(models.State, {foreignKey : 'statusId'})
+      Device.belongsTo(models.Type, { foreignKey: 'typeId', as: 'type' });
+      Device.belongsTo(models.State, { foreignKey: 'statusId', as: 'status' });
     }
   }
+
   Device.init({
     marca: {
       type: DataTypes.STRING,
@@ -25,14 +20,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     typeId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: 'Types',
         key: 'id',
       },
     },
-    numero_serie: DataTypes.STRING,
-    statusId:{ 
+    numero_serie: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    statusId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: 'States',
         key: 'id',
@@ -42,5 +42,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Device',
   });
+
   return Device;
 };

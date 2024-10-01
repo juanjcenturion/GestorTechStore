@@ -2,35 +2,15 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Devices', {
+    await queryInterface.createTable('Roles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      marca: {
+      roleName: {
         type: Sequelize.STRING
-      },
-      modelo: {
-        type: Sequelize.STRING
-      },
-      typeId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Types',
-          key: 'id',
-        },
-      },
-      numero_serie: {
-        type: Sequelize.STRING
-      },
-      statusId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'States',
-          key: 'id',
-        },
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +23,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Devices');
+    await queryInterface.dropTable('Roles');
   }
 };

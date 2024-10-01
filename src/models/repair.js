@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Repair.belongsTo(models.Repair_order, {foreignKey : 'orderId'})
+      Repair.belongsTo(models.RepairOrder, {foreignKey : 'orderId'})
 
     }
   }
@@ -19,12 +19,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model:'Repair_orders',
+        model:'repair_orders',
         key: 'id'
       }
     },
     fechaInicio: DataTypes.DATE,
-    fecha_fin: DataTypes.DATE,
+    fechaFin: DataTypes.DATE,
     realCost: DataTypes.FLOAT
   }, {
     sequelize,
