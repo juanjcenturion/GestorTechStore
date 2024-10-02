@@ -8,6 +8,7 @@ const typeRoutes = require('./src/routes/typeRoutes');
 const stateRoutes = require('./src/routes/stateRoutes')
 const deviceRoutes = require('./src/routes/deviceRoutes');
 const repairOrdersRoutes = require('./src/routes/repairOrdersRoutes');
+const repairRoutes = require('./src/routes/repairRoutes');
 
 dotenv.config();
 
@@ -20,8 +21,9 @@ app.use('/api', userRoutes);
 app.use('/api', roleRoutes);
 app.use('/api', typeRoutes);
 app.use('/api', stateRoutes);
-app.use('/api', deviceRoutes)
-app.use('/api', repairOrdersRoutes)
+app.use('/api', deviceRoutes);
+app.use('/api', repairOrdersRoutes);
+app.use('/api', repairRoutes);
 
 const PORT = process.env.PORT || 4000;
 
