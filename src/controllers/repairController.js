@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../models/index').sequelize;
-const {Repair, RepairOrder} = require('../models/index');
+const {Repair, RepairOrder, Device, State} = require('../models/index');
 
 // Registrar reparación
 const createRepair = async (req, res) => {
@@ -37,7 +37,18 @@ const getAllRepairs = async (req, res) => {
             include : [{
                 model: RepairOrder,
                 as: "repair_order",
-                attributes: ['problema', 'estimatedValue']
+                attributes: ['problema', 'estimatedValue'],
+                include : [{
+                    model:Device,
+                    as:'Device',
+                    attributes : ['marca', 'modelo'],
+                    include: [{
+                        model:State,
+                        as:'status',
+                        attributes:['name',]
+                    }]
+                }]
+
             }]
         })
         res.status(200).json(repairs);
